@@ -1,0 +1,45 @@
+{
+  "name": "@twipped/festival",
+  "version": "0.0.0",
+  "description": "A toolkit to bring jest niceties to node:test.",
+  "main": "index.js",
+  "bin": {
+    "fest": "./fest.js"
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^20.9.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "author": "Jocelyn Badgley <joc@twipped.com>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twipped/festival.git"
+  },
+  "dependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "cosmiconfig": "^9.0.0",
+    "enhanced-resolve": "^5.15.0",
+    "expect": "^29.7.0",
+    "glob": "^10.3.10",
+    "jest-each": "^29.7.0",
+    "jest-mock": "^29.7.0",
+    "jest-snapshot": "^29.7.0",
+    "jsdom": "^23.1.0",
+    "minimatch": "^9.0.3",
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "@twipped/eslint-config": "^8.0.0",
+    "@types/node": "^20.8.10",
+    "eslint": "^8.56.0"
+  }
+}
