@@ -4,7 +4,7 @@ import CONFIG from '../lib/config.js';
 
 process.env.IS_FEST = true;
 
-if (CONFIG.react) {
+if (CONFIG.browser) {
   await import('./jsdom.js');
 }
 
