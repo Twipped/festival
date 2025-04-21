@@ -17,7 +17,6 @@ import {
   clearAllMocks,
   restoreAllMocks,
   reimport,
-  mock,
 } from './stages/mock.js';
 import getTestPath from './lib/get-test-path.js';
 import { toMatchSnapshot } from './lib/snapshots.js';
@@ -86,7 +85,6 @@ export {
   getCurrentTestContext,
   fn,
   spyOn,
-  mock,
   resetAllMocks,
   clearAllMocks,
   restoreAllMocks,
