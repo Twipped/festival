@@ -29,7 +29,4 @@ run({
   watch: argv.watch,
   timeout: CONFIG.timeout,
   only: argv.only,
-  setup (rootTest) {
-    rootTest.harness.shouldColorizeTestFiles = true;
-  },
 }).compose(tap).pipe(process.stdout);
