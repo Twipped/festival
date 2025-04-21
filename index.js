@@ -9,6 +9,7 @@ import {
 } from 'node:test';
 import { expect } from 'expect';
 import { bind as bindEach } from 'jest-each';
+import { ModernFakeTimers as FakeTimers } from '@jest/fake-timers';
 import { asyncStore, currentTestContext as getCurrentTestContext } from './lib/test-context.js';
 import {
   fn,
@@ -57,8 +58,8 @@ describe.only = bindContext(_describe.only);
 describe.skip = bindContext(_describe.skip);
 it.only = bindContext(_it.only);
 it.skip = bindContext(_it.skip);
-test.only = bindContext(_test.only);
-test.skip = bindContext(_test.skip);
+test.only = bindContext(_test.only || _it.only);
+test.skip = bindContext(_test.skip || _it.only);
 
 describe.each = bindEach(describe, false);
 describe.skip.each = bindEach(describe.skip, false);
@@ -71,6 +72,24 @@ it.skip.each = bindEach(it.skip, false);
 it.only.each = bindEach(it.only, false);
 
 expect.extend({ toMatchSnapshot });
+
+const fakeTimers = new FakeTimers({ global, config: {} });
+
+
+const runOnlyPendingTimers = fakeTimers.runOnlyPendingTimers.bind(fakeTimers);
+const runOnlyPendingTimersAsync = fakeTimers.runOnlyPendingTimersAsync.bind(fakeTimers);
+const advanceTimersToNextTimer = fakeTimers.advanceTimersToNextTimer.bind(fakeTimers);
+const advanceTimersToNextTimerAsync = fakeTimers.advanceTimersToNextTimerAsync.bind(fakeTimers);
+const advanceTimersByTime = fakeTimers.advanceTimersByTime.bind(fakeTimers);
+const advanceTimersByTimeAsync = fakeTimers.advanceTimersByTimeAsync.bind(fakeTimers);
+const advanceTimersToNextFrame = fakeTimers.advanceTimersToNextFrame.bind(fakeTimers);
+const runAllTicks = fakeTimers.runAllTicks.bind(fakeTimers);
+const useRealTimers = fakeTimers.useRealTimers.bind(fakeTimers);
+const useFakeTimers = fakeTimers.useFakeTimers.bind(fakeTimers);
+const setSystemTime = fakeTimers.setSystemTime.bind(fakeTimers);
+const getRealSystemTime = fakeTimers.getRealSystemTime.bind(fakeTimers);
+const resetTimers = fakeTimers.reset.bind(fakeTimers);
+const getTimerCount = fakeTimers.getTimerCount.bind(fakeTimers);
 
 export {
   describe,
@@ -90,6 +109,20 @@ export {
   restoreAllMocks,
   reimport,
   expect,
+  runOnlyPendingTimers,
+  runOnlyPendingTimersAsync,
+  advanceTimersToNextTimer,
+  advanceTimersToNextTimerAsync,
+  advanceTimersByTime,
+  advanceTimersByTimeAsync,
+  advanceTimersToNextFrame,
+  runAllTicks,
+  useRealTimers,
+  useFakeTimers,
+  setSystemTime,
+  getRealSystemTime,
+  resetTimers,
+  getTimerCount,
 };
 
 export default {
@@ -105,10 +138,23 @@ export default {
   getCurrentTestContext,
   fn,
   spyOn,
-  mock,
   resetAllMocks,
   clearAllMocks,
   restoreAllMocks,
   reimport,
   expect,
+  runOnlyPendingTimers,
+  runOnlyPendingTimersAsync,
+  advanceTimersToNextTimer,
+  advanceTimersToNextTimerAsync,
+  advanceTimersByTime,
+  advanceTimersByTimeAsync,
+  advanceTimersToNextFrame,
+  runAllTicks,
+  useRealTimers,
+  useFakeTimers,
+  setSystemTime,
+  getRealSystemTime,
+  resetTimers,
+  getTimerCount,
 };

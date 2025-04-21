@@ -29,6 +29,7 @@
   "dependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
+    "@jest/fake-timers": "^30.0.0-alpha.7",
     "cosmiconfig": "^9.0.0",
     "enhanced-resolve": "^5.15.0",
     "expect": "^29.7.0",
