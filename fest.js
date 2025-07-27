@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-param-reassign */
 
-import { tap } from 'node:test/reporters';
+import * as reporters from 'node:test/reporters';
 import { run } from 'node:test';
 import process from 'node:process';
 import path from 'node:path';
@@ -24,9 +24,20 @@ const files = !patterns.length ? testFiles : testFiles.filter((fpath) => pattern
 
 process.execArgv.push('--import', path.resolve(__dirname, 'stages', 'init.js'), '--enable-source-maps');
 
+if (argv['test-reporter']) {
+  CONFIG.reporter = argv['test-reporter'];
+}
+
+const reporter = reporters[CONFIG.reporter] || reporters.tap;
+
 run({
   files,
   watch: argv.watch,
   timeout: CONFIG.timeout,
   only: argv.only,
-}).compose(tap).pipe(process.stdout);
+})
+  .on('test:fail', (...args) => {
+    process.exitCode = 1;
+  })
+  .compose(reporter)
+  .pipe(process.stdout);
