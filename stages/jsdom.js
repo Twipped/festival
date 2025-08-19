@@ -22,7 +22,7 @@ Object.getOwnPropertyNames(dom.window)
   .forEach((k) => { global[k] = dom.window[k]; });
 
 global.document = dom.window.document;
-global.navigator = dom.window.navigator;
+global.window = dom.window;
 
 global.IS_REACT_ACT_ENVIRONMENT = true;
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
